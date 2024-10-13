@@ -13,4 +13,31 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model User {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  name      String
+
+  habits Habit[]
+}
+
+model Habit {
+  id        String  @id @default(uuid())
+  title     String
+  healthy   Boolean
+  entries   HabitEntry[]
+
+  userId   String
+  user     User      @relation(fields: [userId], references: [id])
+
+  entryId String
+}
+
+model HabitEntry {
+  id      String  @id @default(uuid())
+  amount  String
+
+  habitId String
+  habit   Habit     @relation(fields: [habitId], references: [id])
+}
 
