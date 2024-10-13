@@ -35,6 +35,7 @@ model Habit {
 
 model HabitEntry {
   id      String  @id @default(uuid())
+  createdAt DateTime @default(now())
   amount  String
 
   habitId String
