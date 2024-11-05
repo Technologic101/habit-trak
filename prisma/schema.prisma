@@ -22,23 +22,26 @@ model User {
 }
 
 model Habit {
-  id        String  @id @default(uuid())
-  title     String
-  healthy   Boolean
-  entries   HabitEntry[]
+  id            String       @id @default(uuid())
+  title         String
+  valueLabel    String
+  valueLabelPlr String
+  healthy       Boolean
+  entries       HabitEntry[]
 
-  userId   String
-  user     User      @relation(fields: [userId], references: [id])
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
 
   entryId String
 }
 
 model HabitEntry {
-  id      String  @id @default(uuid())
+  id        String   @id @default(uuid())
   createdAt DateTime @default(now())
-  amount  String
+  day       DateTime @default(now())
+  amount    String
+  notes     String
 
   habitId String
-  habit   Habit     @relation(fields: [habitId], references: [id])
+  habit   Habit  @relation(fields: [habitId], references: [id])
 }
-
